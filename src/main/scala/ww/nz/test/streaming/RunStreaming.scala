@@ -36,6 +36,7 @@ object RunStreaming {
         part.foreach(record => producer.value.aksend(record.topic()+"_reproduce",record.value())
         ))
 
+      producer.value.count()
       //submit offsets
       directKafkaStream.asInstanceOf[CanCommitOffsets].commitAsync(offsetsRanges)
     })
